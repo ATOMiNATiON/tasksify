@@ -1,47 +1,49 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "sll.h"
 #define MAX_BUFF 4096
-#define OPTIONS "ha:l"
+#define OPTIONS "ha:lr:"
 
 int main(int argc, char **argv) {
-    int ch = 0, a = 0, l = 0, h = 0;
-    char *taskname;
-    FILE *fp;
-    char buff[MAX_BUFF];
+    int ch = 0, a = 0, l = 0, h = 0, r = 0;
+    char *task_name = NULL;
 
     while ((ch = getopt(argc, argv, OPTIONS)) != -1) {
         switch (ch) {
             case 'a':
                 a = 1;
-                taskname = optarg;
+                if (optind <= argc) {
+                    task_name = argv[optind - 1];
+                } else {
+                    printf("-a requires an argument\n");
+                    exit(1);
+                }
                 break;
             case 'l':
                 l = 1;
                 break;
+            case 'r':
+                r = 1;
             case 'h': h = 1; break;      
         }
     }
-    
+
+    List *task = list_create(".taskrc");
+
     if (a && !h) {
         printf("Adding a task...\n");
-        // only do appending to a file, not writing!
-        // can only append 1 item into file right now
-        fp = fopen("task.txt", "a");
-        fputs(taskname, fp);
-        fclose(fp); 
+        printf("%s\n", task_name);
+        add_task(task_name, &task, ".taskrc"); 
     }
     
     if (l && !h) {
         printf("Listing out all tasks...\n");
-        fp = fopen("task.txt", "r");
-        int tsknum = 1;
-        while (fgets(buff, sizeof(buff), fp)) {
-            printf("%d: %s", tsknum, buff);
-            tsknum++; 
-        }
-        printf("\n"); 
-        fclose(fp);
+        list_tasks(task);        
+    }
+
+    if (r && !h) {
+        printf("Removing a task...\n");
     }
     
     if (h) { 
@@ -54,5 +56,6 @@ int main(int argc, char **argv) {
         printf("   -l            lists all the current tasks\n");
     } 
 
+    free_list(&task);
     return 0;    
 }
