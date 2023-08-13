@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -Werror -Wstrict-prototypes -pedantic -gdwarf-4
 LFLAGS = -lm
 
 EXEC = task
-OBJS = task.o
+OBJS = task.o sll.o
 
 .PHONY: all clean
 all: $(EXEC)
