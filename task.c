@@ -41,7 +41,6 @@ int main(int argc, char **argv) {
     
     if (l && !h) {
         printf("Listing out all tasks...\n");
-        printf("------------------------\n");
         list_tasks(task);        
     }
 
@@ -58,7 +57,8 @@ int main(int argc, char **argv) {
         printf("   ./task -[OPTIONS]\n");
         printf("OPTIONS:\n");
         printf("   -a textfile   Adds a new task to your list of task. If no task is specified, nothing occurs\n");
-        printf("   -l            lists all the current tasks\n");
+        printf("   -l            Lists all the current tasks\n");
+        printf("   -r task#      Removes a task given the task number\n");
     } 
 
     free_list(&task);
