@@ -7,7 +7,7 @@
 
 int main(int argc, char **argv) {
     int ch = 0, a = 0, l = 0, h = 0, r = 0;
-    char *task_name = NULL;
+    char *task_name = NULL, *task_num = NULL;
 
     while ((ch = getopt(argc, argv, OPTIONS)) != -1) {
         switch (ch) {
@@ -25,6 +25,8 @@ int main(int argc, char **argv) {
                 break;
             case 'r':
                 r = 1;
+                task_num = optarg; 
+                break;
             case 'h': h = 1; break;      
         }
     }
@@ -39,11 +41,14 @@ int main(int argc, char **argv) {
     
     if (l && !h) {
         printf("Listing out all tasks...\n");
+        printf("------------------------\n");
         list_tasks(task);        
     }
 
     if (r && !h) {
         printf("Removing a task...\n");
+        int task_id = atoi(task_num);
+        remove_task(task_id, &task);
     }
     
     if (h) { 
