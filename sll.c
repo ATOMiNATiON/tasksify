@@ -119,6 +119,7 @@ void add_task(const char *task_name, List **list, const char *filename) {
     }
     fprintf(fp, "%s\n", task_name);
     fclose(fp);
+    printf("\n");
 }
 
 void remove_task(int task_id, List **list) {
@@ -132,6 +133,7 @@ void remove_task(int task_id, List **list) {
     while (current) {
         if (current->task_id == task_id) {
             remove_row(".taskrc", task_id);
+            printf("%s\n", current->task_name);
 
             if (prev) {
                 prev->next = current->next;
