@@ -177,7 +177,7 @@ void remove_row(const char *filename, int row_num) {
         exit(1);
     }
 
-    char buff[4096];
+    char buff[MAX_SIZE];
     int current_row = 1;
 
     while (fgets(buff, sizeof(buff), original_fp)) {
