@@ -13,12 +13,7 @@ int main(int argc, char **argv) {
         switch (ch) {
             case 'a':
                 a = 1;
-                if (optind <= argc) {
-                    task_name = argv[optind - 1];
-                } else {
-                    printf("-a requires an argument\n");
-                    exit(1);
-                }
+                task_name = optarg;
                 break;
             case 'l':
                 l = 1;
@@ -27,7 +22,9 @@ int main(int argc, char **argv) {
                 r = 1;
                 task_num = optarg; 
                 break;
-            case 'h': h = 1; break;      
+            case 'h':
+                h = 1; 
+                break;      
         }
     }
 
@@ -56,9 +53,20 @@ int main(int argc, char **argv) {
         printf("USAGE:\n");
         printf("   ./task -[OPTIONS]\n");
         printf("OPTIONS:\n");
-        printf("   -a textfile   Adds a new task to your list of task. If no task is specified, nothing occurs\n");
-        printf("   -l            Lists all the current tasks\n");
-        printf("   -r task#      Removes a task given the task number\n");
+        printf("   -a task name  Adds a new task to your list of task. If no task\n");
+        printf("                 is specified, then nothing occurs\n\n");
+        printf("   -l            Lists all the current tasks\n\n");
+        printf("   -r task#      Removes a task given the task number\n\n");
+    } else {
+        printf("SYNOPSIS:\n");
+        printf("   A simple program for task managing purposes\n");
+        printf("USAGE:\n");
+        printf("   ./task -[OPTIONS]\n");
+        printf("OPTIONS:\n");
+        printf("   -a task name  Adds a new task to your list of task. If no task\n");
+        printf("                 is specified, then nothing occurs\n\n");
+        printf("   -l            Lists all the current tasks\n\n");
+        printf("   -r task#      Removes a task given the task number\n\n");
     } 
 
     free_list(&task);
