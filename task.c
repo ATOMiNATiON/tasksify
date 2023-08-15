@@ -57,7 +57,8 @@ int main(int argc, char **argv) {
         printf("                 is specified, then nothing occurs\n\n");
         printf("   -l            Lists all the current tasks\n\n");
         printf("   -r task#      Removes a task given the task number\n\n");
-    } else {
+        printf("   -h            Displays help menu\n");
+    } else if (!r && !l && !a){
         printf("SYNOPSIS:\n");
         printf("   A simple program for task managing purposes\n");
         printf("USAGE:\n");
@@ -67,6 +68,7 @@ int main(int argc, char **argv) {
         printf("                 is specified, then nothing occurs\n\n");
         printf("   -l            Lists all the current tasks\n\n");
         printf("   -r task#      Removes a task given the task number\n\n");
+        printf("   -h            Displays help menu\n");
     } 
 
     free_list(&task);
